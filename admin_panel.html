@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C'RAMOS | Panel Administrativo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #0f0a07;
+      --bg-card: #18110c;
+      --bg-card-hover: #221812;
+      --accent-amber: #e67e22;
+      --accent-gold: #d35400;
+      --text-light: #f5efe6;
+      --text-muted: #a89f91;
+      --border-color: #2c1f17;
+      --success: #2ecc71;
+      --danger: #e74c3c;
+      --warning: #f39c12;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #120d09;
+      color: var(--text-light);
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; }
+
+    .app {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+
+    aside {
+      background: #120d09;
+      border-right: 1px solid var(--border-color);
+      padding: 1.5rem 1rem;
+    }
+
+    .brand {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: white;
+      text-align: center;
+    }
+
+    .brand span { color: var(--accent-amber); }
+
+    .nav {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .nav a {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav a.active,
+    .nav a:hover {
+      background: rgba(230,126,34,0.09);
+      border-color: rgba(230,126,34,0.25);
+      color: var(--text-light);
+    }
+
+    .main {
+      padding: 1.5rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .topbar h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .chip {
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 0.5rem 0.85rem;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .logout {
+      background: transparent;
+      border: 1px solid rgba(230,126,34,0.45);
+      color: var(--text-light);
+      border-radius: 999px;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background: rgba(24,17,12,0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 1.2rem;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+
+    .stat-trend {
+      font-size: 0.8rem;
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .workbook-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, rgba(33, 115, 70, 0.18), rgba(24,17,12,0.92));
+    }
+
+    .workbook-copy { display: flex; align-items: flex-start; gap: 1rem; }
+    .workbook-icon { width: 46px; height: 46px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 12px; background: #217346; color: white; font-size: 1.45rem; }
+    .workbook-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+    .secondary-btn { display: inline-flex; justify-content: center; align-items: center; gap: 0.5rem; padding: 0.82rem 1rem; border: 1px solid rgba(230,126,34,0.45); border-radius: 12px; color: var(--text-light); font-weight: 700; background: rgba(255,255,255,0.03); }
+    .secondary-btn:hover { background: rgba(230,126,34,0.12); }
+    .table-wrap { overflow-x: auto; }
+
+    .panel {
+      background: rgba(24,17,12,0.9);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 1.25rem;
+    }
+
+    .panel h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.75rem 0.6rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    th {
+      color: var(--text-light);
+      font-weight: 700;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(46,204,113,0.12);
+      color: var(--success);
+      border: 1px solid rgba(46,204,113,0.25);
+    }
+
+    .tag.alert {
+      background: rgba(231,76,60,0.12);
+      color: #ffb1aa;
+      border-color: rgba(231,76,60,0.25);
+    }
+
+    .inventory-form {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .inventory-form label {
+      display: grid;
+      gap: 0.45rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .inventory-form input,
+    .inventory-form select {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.8rem 0.9rem;
+      color: var(--text-light);
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--accent-amber), var(--accent-gold));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.4rem;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 920px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .workbook-panel { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="brand">C'RAMOS <span>.</span></div>
+      <nav class="nav">
+        <a href="#" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+        <a href="#inventario"><i class="fa-solid fa-boxes-stacked"></i> Inventario</a>
+        <a href="#"><i class="fa-solid fa-utensils"></i> Menú</a>
+        <a href="#"><i class="fa-solid fa-calendar-check"></i> Eventos</a>
+        <a href="#"><i class="fa-solid fa-chart-line"></i> Financieros</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <h1>Panel administrativo</h1>
+        <div class="top-actions">
+          <div class="chip"><i class="fa-solid fa-user-shield"></i> Administrador</div>
+          <button class="logout" id="logoutBtn">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <section class="grid">
+        <div class="card">
+          <div class="stat-row">
+            <span class="stat-label">Inventario total</span>
+            <span class="stat-trend">+8.4%</span>
+          </div>
+          <div class="stat-value">296</div>
+        </div>
+
+        <div class="card">
+          <div class="stat-row">
+            <span class="stat-label">Productos críticos</span>
+            <span class="stat-trend">-2.1%</span>
+          </div>
+          <div class="stat-value">14</div>
+        </div>
+
+        <div class="card">
+          <div class="stat-row">
+            <span class="stat-label">Eventos activos</span>
+            <span class="stat-trend">+3</span>
+          </div>
+          <div class="stat-value">09</div>
+        </div>
+
+        <div class="card">
+          <div class="stat-row">
+            <span class="stat-label">Costo del día</span>
+            <span class="stat-trend">-5.6%</span>
+          </div>
+          <div class="stat-value">$1.8M</div>
+        </div>
+      </section>
+
+      <section class="panel workbook-panel" id="inventario" aria-labelledby="workbookTitle">
+        <div class="workbook-copy">
+          <div class="workbook-icon"><i class="fa-solid fa-file-excel" aria-hidden="true"></i></div>
+          <div>
+            <h3 id="workbookTitle">Control de inventario en Excel</h3>
+            <p class="muted">Libro maestro: <strong>Control_Integral_Cramos.xlsx</strong>. Usa la hoja <strong>INVENTARIO</strong> para registrar existencias, compras y movimientos.</p>
+          </div>
+        </div>
+        <div class="workbook-actions">
+          <a class="primary-btn" style="margin-top:0" href="Control_Integral_Cramos.xlsx" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Excel</a>
+          <a class="secondary-btn" href="Control_Integral_Cramos.xlsx" download><i class="fa-solid fa-download"></i> Descargar copia</a>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel">
+          <h3>Productos del inventario</h3>
+          <div class="table-wrap"><table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTableBody"></tbody>
+          </table></div>
+        </div>
+
+        <div class="panel">
+          <h3>Agregar producto</h3>
+          <form class="inventory-form" id="inventoryForm">
+            <label>
+              Nombre
+              <input type="text" id="productName" placeholder="Ej: Carne de cerdo" required>
+            </label>
+            <label>
+              Categoría
+              <select id="productCategory" required>
+                <option value="">Seleccione</option>
+                <option>Proteínas</option>
+                <option>Verduras</option>
+                <option>Bebidas</option>
+                <option>Condimentos</option>
+              </select>
+            </label>
+            <label>
+              Cantidad
+              <input type="number" id="productQuantity" min="0" value="0" required>
+            </label>
+            <label>
+              Precio unitario
+              <input type="number" id="productPrice" min="0" value="0" required>
+            </label>
+            <button class="primary-btn" type="submit">Guardar producto</button>
+          </form>
+          <p class="muted" style="margin-top: 1rem;">El administrador podrá actualizar el inventario, precios, pedidos y eventos desde esta vista.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const loggedIn = localStorage.getItem('cramosAdminLoggedIn');
+    if (loggedIn !== 'true') {
+      window.location.href = 'admin.html';
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', function () {
+      localStorage.removeItem('cramosAdminLoggedIn');
+      window.location.href = 'admin.html';
+    });
+
+    const defaultInventory = [
+      { name: 'Carne res', category: 'Proteínas', quantity: 48, unit: 'kg', price: 18000 },
+      { name: 'Pollo', category: 'Proteínas', quantity: 22, unit: 'kg', price: 9500 },
+      { name: 'Papas', category: 'Verduras', quantity: 9, unit: 'kg', price: 3800 },
+      { name: 'Refrescos', category: 'Bebidas', quantity: 64, unit: 'und', price: 5200 }
+    ];
+    const inventoryStorageKey = 'cramosInventory';
+    const inventory = JSON.parse(localStorage.getItem(inventoryStorageKey)) || defaultInventory;
+
+    function formatPrice(value) {
+      return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(value);
+    }
+
+    function renderInventory() {
+      const tableBody = document.getElementById('inventoryTableBody');
+      tableBody.innerHTML = '';
+      inventory.forEach((product) => {
+        const lowStock = product.quantity <= 10;
+        const row = document.createElement('tr');
+        const values = [product.name, `${product.quantity} ${product.unit}`, formatPrice(product.price)];
+        values.forEach((value) => {
+          const cell = document.createElement('td');
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        const statusCell = document.createElement('td');
+        const status = document.createElement('span');
+        status.className = `tag${lowStock ? ' alert' : ''}`;
+        status.textContent = lowStock ? 'Bajo stock' : 'Disponible';
+        statusCell.appendChild(status);
+        row.appendChild(statusCell);
+        tableBody.appendChild(row);
+      });
+    }
+
+    renderInventory();
+
+    document.getElementById('inventoryForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const category = document.getElementById('productCategory').value;
+      inventory.push({
+        name: document.getElementById('productName').value.trim(),
+        category,
+        quantity: Number(document.getElementById('productQuantity').value),
+        unit: category === 'Bebidas' ? 'und' : 'kg',
+        price: Number(document.getElementById('productPrice').value)
+      });
+      localStorage.setItem(inventoryStorageKey, JSON.stringify(inventory));
+      renderInventory();
+      this.reset();
+      document.getElementById('productQuantity').value = '0';
+      document.getElementById('productPrice').value = '0';
+      alert('Producto agregado. Recuerda registrar el movimiento definitivo en el archivo Excel.');
+    });
+  </script>
+</body>
+</html>

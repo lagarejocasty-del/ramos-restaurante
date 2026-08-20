@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C'RAMOS | Sabor al Barril & Gastronomía</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0f0a07;
+            --bg-card: #18110c;
+            --bg-card-hover: #221812;
+            --accent-amber: #e67e22;
+            --accent-gold: #d35400;
+            --accent-glow: #f39c12;
+            --text-light: #f5efe6;
+            --text-muted: #a89f91;
+            --border-color: #2c1f17;
+        }
+
+        body.light-theme {
+            --bg-dark: #f8f5ef;
+            --bg-card: #ffffff;
+            --bg-card-hover: #fff4e8;
+            --text-light: #211711;
+            --text-muted: #62574d;
+            --border-color: #e4d7ca;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Header / Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 10, 7, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        body.light-theme header { background: rgba(255, 253, 249, 0.94); }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            display: block;
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.45));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-amber);
+        }
+
+        .btn-reservation {
+            background: linear-gradient(135deg, var(--accent-amber), var(--accent-gold));
+            color: #fff;
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-reservation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.5);
+        }
+
+        .btn-admin {
+            background: transparent;
+            border: 1px solid rgba(230,126,34,0.5);
+            color: var(--text-light);
+            padding: 0.6rem 1.1rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-admin:hover {
+            background: rgba(230,126,34,0.12);
+            border-color: var(--accent-amber);
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            background: var(--bg-card);
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.25s ease;
+        }
+
+        .theme-toggle:hover { border-color: var(--accent-amber); color: var(--accent-amber); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 650px;
+            background: linear-gradient(to bottom, rgba(15, 10, 7, 0.4), var(--bg-dark)),
+                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin-top: 60px;
+        }
+
+        .hero-subtitle {
+            color: var(--accent-amber);
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero .btn-secondary { color: #fff; border-color: rgba(255,255,255,0.82); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-amber), var(--accent-gold));
+            color: #fff;
+            padding: 0.9rem 2.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--accent-amber);
+            color: var(--text-light);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-amber);
+            color: #fff;
+        }
+
+        .event-section {
+            background: linear-gradient(135deg, rgba(230,126,34,0.08), rgba(15,10,7,0.2));
+            padding: 6rem 2rem;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .event-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .event-list {
+            list-style: none;
+            margin: 2rem 0;
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .event-list li {
+            color: var(--text-muted);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .event-list li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent-amber);
+        }
+
+        .event-card {
+            background: rgba(24,17,12,0.9);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            padding: 2rem;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+        }
+
+        .event-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-highlight {
+            background: rgba(230,126,34,0.12);
+            border: 1px solid rgba(230,126,34,0.25);
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+            color: var(--text-light);
+            margin: 1rem 0;
+            font-weight: 600;
+        }
+
+        .event-card p {
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Experiences gallery */
+        .experiences-section {
+            padding: 6rem 2rem;
+            background: #100b08;
+        }
+
+        body.light-theme .experiences-section { background: #fffaf4; }
+        body.light-theme .event-section { background: linear-gradient(135deg, #fff2e3, #f8f5ef); }
+        body.light-theme .cart-panel { background: #ffffff; }
+        body.light-theme footer { background: #211711; }
+        body.light-theme .event-card { background: #ffffff; }
+        body.light-theme .hero {
+            background: linear-gradient(to bottom, rgba(15, 10, 7, 0.5), rgba(15, 10, 7, 0.82)),
+                        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        body.light-theme .hero-content { color: #fff; }
+        body.light-theme .hero-desc { color: rgba(255,255,255,0.9); }
+        body.light-theme footer { color: #d8c9bd; }
+        body.light-theme footer .footer-col h4 { color: #fff; }
+
+        .experiences-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .experiences-intro {
+            max-width: 650px;
+            margin-bottom: 2rem;
+        }
+
+        .experiences-intro p:last-child {
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        .experience-gallery {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 230px;
+            gap: 1rem;
+        }
+
+        .gallery-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 0;
+            cursor: pointer;
+            background: var(--bg-card);
+            text-align: left;
+        }
+
+        .gallery-card:nth-child(1) { grid-column: span 4; grid-row: span 2; }
+        .gallery-card:nth-child(2) { grid-column: span 8; }
+        .gallery-card:nth-child(3) { grid-column: span 4; }
+        .gallery-card:nth-child(4) { grid-column: span 8; }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+
+        .gallery-card:hover img,
+        .gallery-card:focus-visible img { transform: scale(1.06); }
+
+        .gallery-caption {
+            position: absolute;
+            inset: auto 0 0;
+            padding: 2.8rem 1rem 1rem;
+            color: white;
+            background: linear-gradient(transparent, rgba(0,0,0,0.88));
+        }
+
+        .gallery-caption span { color: #ffc57f; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+        .gallery-caption strong { display: block; margin-top: 0.25rem; font-size: 1.05rem; }
+
+        .gallery-modal {
+            position: fixed;
+            z-index: 2000;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            background: rgba(0,0,0,0.86);
+        }
+
+        .gallery-modal.open { display: flex; }
+        .gallery-modal img { max-width: min(900px, 100%); max-height: 82vh; border-radius: 14px; object-fit: contain; box-shadow: 0 24px 60px rgba(0,0,0,0.55); }
+        .gallery-close { position: absolute; top: 1.2rem; right: 1.2rem; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.35); border-radius: 50%; background: rgba(0,0,0,0.5); color: white; font-size: 1.25rem; cursor: pointer; }
+
+        .promo-tuesday {
+            position: relative;
+            background: linear-gradient(135deg, rgba(18, 10, 8, 0.7), rgba(18, 10, 8, 0.82)),
+                        url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 4rem 2rem;
+            overflow: hidden;
+        }
+
+        .promo-tuesday::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,137,0,0.18), rgba(0,0,0,0.45));
+        }
+
+        .promo-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            color: #fff;
+        }
+
+        .promo-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #d95c00, #b11f00);
+            color: #fff5d8;
+            border-radius: 12px;
+            padding: 0.6rem 1.3rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 10px 30px rgba(230, 126, 34, 0.4);
+        }
+
+        .promo-title {
+            font-size: clamp(2.3rem, 5vw, 6rem);
+            line-height: 0.95;
+            font-weight: 900;
+            color: #f6d66b;
+            text-shadow: 4px 4px 0 #7d2300, 8px 8px 0 rgba(0, 0, 0, 0.35);
+            letter-spacing: 1px;
+        }
+
+        .promo-subtitle {
+            margin-top: 0.8rem;
+            font-size: clamp(1.2rem, 2.3vw, 2.4rem);
+            font-weight: 800;
+            color: #fff6dc;
+            text-transform: uppercase;
+        }
+
+        .promo-price-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            margin-top: 2rem;
+        }
+
+        .promo-price {
+            color: #fff5d8;
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .promo-price small {
+            font-size: 0.45em;
+            color: #f8d66b;
+            display: inline-block;
+            margin-right: 0.3rem;
+        }
+
+        .promo-call {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            color: #fff;
+            font-size: clamp(1.2rem, 2vw, 2.2rem);
+            font-weight: 800;
+        }
+
+        .promo-phone {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 999px;
+            padding: 0.75rem 1.2rem;
+        }
+
+        .promo-phone i {
+            color: var(--accent-amber);
+        }
+
+        /* Highlights Section */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            color: var(--accent-amber);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Menu Section */
+        .menu-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .menu-tab {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.6rem 1.4rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .menu-tab.active, .menu-tab:hover {
+            background: var(--accent-amber);
+            color: #fff;
+            border-color: var(--accent-amber);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
+            border-color: rgba(230, 126, 34, 0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            gap: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        .card-price {
+            color: var(--accent-amber);
+            font-weight: 800;
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.2rem 0.6rem;
+            background: rgba(230, 126, 34, 0.15);
+            color: var(--accent-amber);
+            border-radius: 6px;
+            width: fit-content;
+        }
+
+        /* Special Order Widget / Cart preview */
+        .cart-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #27ae60, #2ea043);
+            color: #fff;
+            padding: 1rem 1.8rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            z-index: 999;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .cart-bar:hover {
+            transform: scale(1.05);
+        }
+
+        a.cart-bar { display: none; }
+
+        .cart-count {
+            display: grid;
+            place-items: center;
+            min-width: 22px;
+            height: 22px;
+            padding: 0 0.35rem;
+            border-radius: 999px;
+            background: white;
+            color: #1b6d3b;
+            font-size: 0.75rem;
+        }
+
+        .add-to-cart {
+            border: 0;
+            background: transparent;
+            color: var(--accent-amber);
+            font: inherit;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 0.35rem 0;
+        }
+
+        .cart-panel {
+            position: fixed;
+            z-index: 1500;
+            top: 0;
+            right: 0;
+            width: min(420px, 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1.4rem;
+            background: #18110c;
+            border-left: 1px solid var(--border-color);
+            box-shadow: -20px 0 50px rgba(0,0,0,0.45);
+            transform: translateX(105%);
+            transition: transform 0.3s ease;
+        }
+
+        .cart-panel.open { transform: translateX(0); }
+        .cart-header, .cart-item, .cart-summary { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+        .cart-header { padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+        .cart-header h3 { font-size: 1.35rem; }
+        .cart-close, .quantity-btn { border: 1px solid var(--border-color); background: transparent; color: var(--text-light); cursor: pointer; }
+        .cart-close { width: 38px; height: 38px; border-radius: 50%; font-size: 1.15rem; }
+        .cart-items { flex: 1; overflow-y: auto; padding: 0.5rem 0; }
+        .cart-item { padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
+        .cart-item-name { font-weight: 700; font-size: 0.92rem; }
+        .cart-item-price { color: var(--accent-amber); font-size: 0.85rem; margin-top: 0.25rem; }
+        .quantity-controls { display: flex; align-items: center; gap: 0.55rem; }
+        .quantity-btn { width: 29px; height: 29px; border-radius: 8px; font-size: 1rem; }
+        .cart-empty { color: var(--text-muted); text-align: center; padding: 3rem 1rem; }
+        .cart-footer { border-top: 1px solid var(--border-color); padding-top: 1rem; }
+        .cart-summary { font-size: 1.05rem; margin-bottom: 1rem; }
+        .checkout-btn { width: 100%; border: 0; cursor: pointer; font: inherit; font-weight: 700; padding: 1rem; border-radius: 12px; color: white; background: linear-gradient(135deg, #27ae60, #2ea043); }
+        .checkout-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        /* About / Experience Section */
+        .experience {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 5rem 2rem;
+        }
+
+        .exp-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .exp-img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Footer */
+        footer {
+            background: #080503;
+            padding: 4rem 2rem 2rem 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            background: var(--bg-card);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-amber);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .exp-container { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .nav-container { padding: 0.65rem 1rem; }
+            .logo img { width: 56px; height: 56px; }
+            .experiences-section { padding: 4.5rem 1rem; }
+            .experience-gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 190px; gap: 0.7rem; }
+            .gallery-card:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+            .gallery-card:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+            .cart-bar { right: 12px; bottom: 12px; padding: 0.85rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo" aria-label="Inicio C'RAMOS">
+                <img src="logo-cramos.png" alt="Logo C'RAMOS Restaurante & Bar">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#experiencias">Experiencias</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Activar modo claro" title="Cambiar tema">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                </button>
+                <a href="admin.html" class="btn-admin">Admin</a>
+                <a href="https://wa.me/?text=Hola%20C'RAMOS,%20deseo%20hacer%20un%20pedido" class="btn-reservation" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Pedir por WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">Tradición & Fuego</p>
+            <h1 class="hero-title">Sabor Auténtico al Barril & Gastronomía</h1>
+            <p class="hero-desc">Cortes seleccionados, sazón tradicional y el inigualable toque crocante de nuestra cocción lenta en barril. Disfruta una experiencia culinaria superior.</p>
+            <div class="hero-btns">
+                <a href="#menu" class="btn-primary">Ver Menú Completo</a>
+                <a href="eventos.html" class="btn-secondary">Eventos para fiestas</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="promo-tuesday" aria-label="Promoción de martes">
+        <div class="promo-content">
+            <div class="promo-badge">Exclusivo todos los martes</div>
+            <div class="promo-title">2 HAMBURGUESAS</div>
+            <div class="promo-subtitle">a la parrilla para convertir tu martes en el mejor plan</div>
+
+            <div class="promo-price-wrap">
+                <div class="promo-price"><small>$</small>35.000</div>
+                <div class="promo-call">
+                    <span>Haz tu pedido aquí</span>
+                    <span class="promo-phone"><i class="fa-solid fa-phone"></i> 312 784 5758</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section" id="menu">
+        <div class="section-header">
+            <p class="section-tag">Nuestra Carta</p>
+            <h2 class="section-title">Explora Nuestras Especialidades</h2>
+        </div>
+
+        <div class="menu-nav" id="menu-tabs">
+            <!-- Tabs injected dynamically -->
+        </div>
+
+        <div class="menu-grid" id="menu-items-grid">
+            <!-- Items injected dynamically -->
+        </div>
+    </section>
+
+    <section class="event-section" id="eventos">
+        <div class="event-container">
+            <div>
+                <p class="section-tag">Eventos y celebraciones</p>
+                <h2 class="section-title">Fiestas inolvidables con la mejor experiencia gastronómica</h2>
+                <p style="color: var(--text-muted); margin-top: 1rem; max-width: 640px;">Organiza cumpleaños, reuniones familiares, eventos empresariales o celebraciones especiales con un servicio pensado para grupos, una carta personalizada y atención exclusiva para cada detalle.</p>
+                <ul class="event-list">
+                    <li>Menu personalizado según la cantidad de personas.</li>
+                    <li>Descuento del 6% por cada plato dentro del evento.</li>
+                    <li>Se debe separar el 50% del valor total para confirmar la reserva.</li>
+                    <li>Las bebidas serán consumidas en el local durante la celebración.</li>
+                </ul>
+                <a href="eventos.html" class="btn-primary">Solicitar cotización del evento</a>
+            </div>
+            <div class="event-card">
+                <h3>Incluye para tu evento</h3>
+                <div class="event-highlight">Descuento del 6% por servicio de evento</div>
+                <p>Valor inicial estimado según número de personas y platos seleccionados.</p>
+                <p>Se recomienda separar la mitad del valor al confirmar la fecha.</p>
+                <p>La bebida se consume en el local y no incluye servicio fuera del restaurante.</p>
+                <a href="eventos.html" class="btn-secondary" style="display: inline-block; margin-top: 0.5rem;">Ir al formulario</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="experiences-section" id="experiencias" aria-labelledby="experiences-title">
+        <div class="experiences-container">
+            <div class="experiences-intro">
+                <p class="section-tag">Momentos C'RAMOS</p>
+                <h2 class="section-title" id="experiences-title">Experiencias para celebrar, compartir y disfrutar</h2>
+                <p>Conoce nuestro espacio y la energía de los cumpleaños, las reuniones y las transmisiones deportivas en vivo. Haz clic en una imagen para verla en grande.</p>
+            </div>
+            <div class="experience-gallery">
+                <button class="gallery-card" type="button" data-image="WhatsApp Image 2026-08-19 at 8.33.13 PM.jpeg" data-alt="Celebración de cumpleaños en C'RAMOS">
+                    <img src="WhatsApp Image 2026-08-19 at 8.33.13 PM.jpeg" alt="Celebración de cumpleaños en C'RAMOS" loading="lazy">
+                    <span class="gallery-caption"><span>Celebraciones</span><strong>Cumpleaños con estilo</strong></span>
+                </button>
+                <button class="gallery-card" type="button" data-image="WhatsApp Image 2026-08-19 at 8.33.14 PM (1).jpeg" data-alt="Servicio de comida durante una transmisión deportiva">
+                    <img src="WhatsApp Image 2026-08-19 at 8.33.14 PM (1).jpeg" alt="Servicio de comida durante una transmisión deportiva" loading="lazy">
+                    <span class="gallery-caption"><span>Servicio</span><strong>Sabor para compartir</strong></span>
+                </button>
+                <button class="gallery-card" type="button" data-image="WhatsApp Image 2026-08-19 at 8.33.14 PM (2).jpeg" data-alt="Vista nocturna del local durante una transmisión de fútbol">
+                    <img src="WhatsApp Image 2026-08-19 at 8.33.14 PM (2).jpeg" alt="Vista nocturna del local durante una transmisión de fútbol" loading="lazy">
+                    <span class="gallery-caption"><span>Ambiente</span><strong>Partidos en pantalla grande</strong></span>
+                </button>
+                <button class="gallery-card" type="button" data-image="WhatsApp Image 2026-08-19 at 8.33.14 PM.jpeg" data-alt="Clientes reunidos en C'RAMOS durante un partido">
+                    <img src="WhatsApp Image 2026-08-19 at 8.33.14 PM.jpeg" alt="Clientes reunidos en C'RAMOS durante un partido" loading="lazy">
+                    <span class="gallery-caption"><span>Encuentros</span><strong>Un espacio para la afición</strong></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="gallery-modal" id="galleryModal" aria-hidden="true" role="dialog" aria-label="Vista ampliada de experiencia">
+        <button class="gallery-close" type="button" aria-label="Cerrar imagen"><i class="fa-solid fa-xmark"></i></button>
+        <img id="galleryModalImage" src="" alt="">
+    </div>
+
+    <!-- Experience / About Section -->
+    <section class="experience" id="nosotros">
+        <div class="exp-container">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="C'RAMOS Asados" class="exp-img">
+            <div>
+                <p class="section-tag">La Experiencia C'RAMOS</p>
+                <h2 class="section-title" style="margin-bottom: 1.5rem;">Maestría en Cocción al Barril</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1.2rem;">En <strong>C'RAMOS</strong> perfeccionamos el arte del asado al barril. Nuestra técnica permite lograr carnes extraordinariamente jugosas por dentro con un chicharrón y cubierta perfectamente crujiente por fuera.</p>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Acompañamos nuestras especialidades con patacones crocantes, ensaladas frescas, bebidas refrescantes y una selección exclusiva de coctelería y licores para celebrar cada momento.</p>
+                <a href="https://wa.me/?text=Hola%20C'RAMOS,%20quiero%20conocer%20sus%20promociones" class="btn-primary" target="_blank">Escríbenos directamente</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping cart -->
+    <button class="cart-bar" id="openCartBtn" type="button" aria-label="Abrir pedido">
+        <i class="fa-solid fa-bag-shopping" style="font-size: 1.3rem;"></i>
+        <span>Mi pedido</span>
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <aside class="cart-panel" id="cartPanel" aria-label="Resumen del pedido" aria-hidden="true">
+        <div class="cart-header">
+            <h3>Tu pedido</h3>
+            <button class="cart-close" id="closeCartBtn" type="button" aria-label="Cerrar pedido"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems"><p class="cart-empty">Aún no has agregado productos.</p></div>
+        <div class="cart-footer">
+            <div class="cart-summary"><span>Total</span><strong id="cartTotal">$ 0</strong></div>
+            <button class="checkout-btn" id="checkoutBtn" type="button" disabled><i class="fa-brands fa-whatsapp"></i> Enviar pedido por WhatsApp</button>
+        </div>
+    </aside>
+
+    <!-- Legacy direct-order link -->
+    <a href="https://wa.me/?text=Hola%20C'RAMOS,%20quiero%20consultar%20el%20menú%20y%20hacer%20un%20pedido" class="cart-bar" target="_blank">
+        <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i>
+        <span>Hacer Pedido Directo</span>
+    </a>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4 class="brand-font">C'RAMOS</h4>
+                <p>Gastronomía de alta calidad, especializados en cocción al barril, platos a la plancha, especialidades y coctelería.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Horarios de Atención</h4>
+                <p><i class="fa-regular fa-clock" style="color: var(--accent-amber);"></i> Martes a Domingo: 05:00 PM - 10:00 PM</p>
+                <p><i class="fa-solid fa-utensils" style="color: var(--accent-amber);"></i> Servicio en mesa y domicilios</p>
+            </div>
+            <div class="footer-col">
+                <h4>Ubicación & Contacto</h4>
+                <p><i class="fa-solid fa-location-dot" style="color: var(--accent-amber);"></i> Zona Gastronómica Principal</p>
+                <p><i class="fa-solid fa-phone" style="color: var(--accent-amber);"></i> +57 314 600 8516</p>
+            </div>
+        </div>
+        <p style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem;">
+            &copy; 2026 E&E SOLUCIONES TIC. Todos los derechos reservados.
+        </p>
+    </footer>
+
+    <script>
+        const themeStorageKey = 'cramosTheme';
+        const themeToggle = document.getElementById('themeToggle');
+
+        function applyTheme(theme) {
+            const isLight = theme === 'light';
+            document.body.classList.toggle('light-theme', isLight);
+            themeToggle.innerHTML = `<i class="fa-solid fa-${isLight ? 'moon' : 'sun'}" aria-hidden="true"></i>`;
+            themeToggle.setAttribute('aria-label', isLight ? 'Activar modo oscuro' : 'Activar modo claro');
+            themeToggle.title = isLight ? 'Activar modo oscuro' : 'Activar modo claro';
+        }
+
+        const savedTheme = localStorage.getItem(themeStorageKey);
+        applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+
+        themeToggle.addEventListener('click', () => {
+            const nextTheme = document.body.classList.contains('light-theme') ? 'dark' : 'light';
+            localStorage.setItem(themeStorageKey, nextTheme);
+            applyTheme(nextTheme);
+        });
+
+        document.querySelector('.promo-call > span').textContent = 'Ven al local o pide tu combo a domicilio';
+        const rawMenuData = {"A la Plancha": [{"name": "Carne de Cerdo", "desc": "300 g, ensalada, patacones y pico de gallo", "price": 32000}, {"name": "Pechuga Gratinada", "desc": "Pechuga de pollo, ensalada, patacones", "price": 32000}, {"name": "Carne de Res", "desc": "300 g, ensalada, patacones", "price": 35000}], "Adiciones": [{"name": "Papas al Vapor", "desc": "", "price": 8000}, {"name": "Ensalada", "desc": "", "price": 4000}, {"name": "Patacón", "desc": "", "price": 8000}, {"name": "Carne", "desc": "", "price": 12000}], "Al Barril": [{"name": "Costilla en BBQ o Miel Mostaza", "desc": "", "price": 40000}, {"name": "Chicharrón", "desc": "", "price": 33000}, {"name": "Costchi", "desc": "", "price": 40000}, {"name": "Bundiola", "desc": "", "price": 37000}, {"name": "Dúo", "desc": "2 carnes: Costilla, Chicharrón o Bundiola", "price": 41000}, {"name": "Chorizo Certegueño", "desc": "", "price": 25000}, {"name": "Picadas", "desc": "Precio desde", "price": 50000}], "Bebidas": [{"name": "Jugos Naturales en Agua", "desc": "", "price": 10000}, {"name": "Gaseosa Personal / Ginger / Mr Tea / Soda / Jugo Hit", "desc": "", "price": 5000}, {"name": "Agua", "desc": "", "price": 4000}, {"name": "Gatorade", "desc": "", "price": 8000}, {"name": "Gaseosa 1.5 L", "desc": "", "price": 12000}], "Cervezas": [{"name": "Poker / Águila / Pilsen / Cola & Pola", "desc": "", "price": 5000}, {"name": "Club Colombia / Águila Light / Red / Coronita", "desc": "", "price": 6000}, {"name": "Corona / Stella", "desc": "", "price": 10000}], "Cócteles": [{"name": "Margarita (Blue-Red) (Tequila)", "desc": "", "price": 25000}, {"name": "Sex On The Beach (Vodka)", "desc": "", "price": 22000}, {"name": "Verano Azul (Vodka)", "desc": "", "price": 22000}, {"name": "Cuba Libre (Bacardí)", "desc": "", "price": 18000}, {"name": "Artesanal (Viche)", "desc": "", "price": 18000}], "Entradas": [{"name": "Patacón de Plátano (x4)", "desc": "Queso rayado", "price": 20000}], "Especial de Cramos": [{"name": "Ceviche de Chicharrón", "desc": "Chicharrón, patacones", "price": 35000}, {"name": "Super Orden", "desc": "Chicharrón, carne desmechada, pollo desmechado, chorizo, salchicha, queso, hogao o pico de gallo", "price": 55000}], "Hamburguesas": [{"name": "Sencilla", "desc": "Pan artesanal, tomate, cebolla caramelizada, carne de hamburguesa, tocineta, queso gratinado, papa a la francesa, salsa", "price": 20000}, {"name": "Sabor a Parrilla", "desc": "Pan artesanal, tomate, cebolla caramelizada, carne de hamburguesa, carne al barril, queso gratinado, papa a la francesa, salsa", "price": 25000}, {"name": "La Brava BBQ", "desc": "Pan artesanal, tomate, cebolla caramelizada, carne de hamburguesa, carne de costilla, queso gratinado, papa a la francesa, salsa", "price": 28000}], "Licores": [{"name": "Buchanan's Master Lt.", "desc": "", "price": 300000}, {"name": "Buchanan's Deluxe Lt.", "desc": "", "price": 250000}, {"name": "Old Parr Lt.", "desc": "", "price": 240000}, {"name": "Ron Caldas 8 Años Botella", "desc": "", "price": 135000}, {"name": "Ron Caldas 8 Años Media", "desc": "", "price": 75000}, {"name": "Ron Caldas 5 Años Botella", "desc": "", "price": 110000}, {"name": "Ron Caldas 5 Años Media", "desc": "", "price": 65000}, {"name": "Ron Caldas 3 Años Media", "desc": "", "price": 50000}, {"name": "Ron Esencial Botella", "desc": "", "price": 85000}, {"name": "Ron Esencial Media", "desc": "", "price": 45000}, {"name": "Ron Medellín (29°) Verde Botella", "desc": "", "price": 60000}, {"name": "Aguardiente Antioqueño Litro", "desc": "", "price": 85000}, {"name": "Aguardiente Antioqueño Media", "desc": "", "price": 40000}, {"name": "Baileys Botella", "desc": "", "price": 130000}], "Limonadas": [{"name": "Natural", "desc": "", "price": 10000}, {"name": "Coco / Cerezada", "desc": "", "price": 12000}, {"name": "Fusión", "desc": "", "price": 14000}], "Micheladas": [{"name": "Cereza", "desc": "", "price": 14000}, {"name": "Maracuyá", "desc": "", "price": 14000}, {"name": "Mango Biche", "desc": "", "price": 14000}, {"name": "Manzana Verde", "desc": "", "price": 14000}, {"name": "Frutos Rojos", "desc": "", "price": 16000}, {"name": "Poker / Águila / Pilsen / Cola & Pola", "desc": "", "price": 10000}, {"name": "Club Colombia / Águila Light / Red / Coronita", "desc": "", "price": 12000}, {"name": "Corona / Stella", "desc": "", "price": 14000}], "Patacón Cramos": [{"name": "Patacón Cramos", "desc": "3 proteínas, 3 acompañantes y 2 salsas", "price": 30000}], "Salchipapas": [{"name": "Sencilla", "desc": "Salchicha tipo ranchera, papas, tocineta, queso gratinado", "price": 20000}, {"name": "Especial", "desc": "Salchicha tipo ranchera, trozos de carne al barril, papas, tocineta, queso gratinado, salsa", "price": 30000}], "Vinos": [{"name": "J.P. Chenet", "desc": "", "price": 110000}, {"name": "Lambrusco (Rosado - Tinto)", "desc": "", "price": 80000}]};
+
+        rawMenuData['Salchipapas'].push({
+            name: 'SALCHIPAPA C´RAMOS',
+            displayName: 'SALCHIPAPA<br>C\u00B4RAMOS',
+            desc: 'Salchicha tipo ranchera, trozos de carne al barril, papas, tocineta, queso gratinado y salsa. Para compartir entre 4 y 6 personas',
+            price: 50000
+        });
+        rawMenuData['Salchipapas'][rawMenuData['Salchipapas'].length - 1].name = 'SALCHIPAPA C\u00B4RAMOS';
+
+        const categoriesOrder = [
+            'Al Barril', 'A la Plancha', 'Especial de Cramos', 'Hamburguesas', 
+            'Salchipapas', 'Patacón Cramos', 'Entradas', 'Adiciones', 
+            'Limonadas', 'Micheladas', 'Cócteles', 'Cervezas', 'Bebidas', 'Vinos', 'Licores'
+        ];
+
+        let currentCategory = 'Al Barril';
+
+        function renderTabs() {
+            const tabsContainer = document.getElementById('menu-tabs');
+            tabsContainer.innerHTML = '';
+
+            categoriesOrder.forEach(cat => {
+                if (rawMenuData[cat]) {
+                    const btn = document.createElement('button');
+                    btn.className = `menu-tab ${cat === currentCategory ? 'active' : ''}`;
+                    btn.innerText = cat;
+                    btn.onclick = () => {
+                        currentCategory = cat;
+                        renderTabs();
+                        renderItems();
+                    };
+                    tabsContainer.appendChild(btn);
+                }
+            });
+        }
+
+        function formatPrice(val) {
+            return '$ ' + val.toLocaleString('es-CO');
+        }
+
+        function renderItems() {
+            const grid = document.getElementById('menu-items-grid');
+            grid.innerHTML = '';
+
+            const items = rawMenuData[currentCategory] || [];
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'menu-card';
+
+                const descText = item.desc ? item.desc : 'Preparación fresca elaborada con insumos de alta calidad e ingredientes seleccionados.';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="card-header">
+                            <h3 class="card-title">${item.displayName || item.name}</h3>
+                            <span class="card-price">${formatPrice(item.price)}</span>
+                        </div>
+                        <p class="card-desc">${descText}</p>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                        <span class="card-tag">${currentCategory}</span>
+                        <a href="https://wa.me/?text=Hola%20C'RAMOS,%20deseo%20pedir:%20${encodeURIComponent(item.name)}" target="_blank" style="color: var(--accent-amber); text-decoration: none; font-weight: 600; font-size: 0.85rem;">
+                            Pedir <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                `;
+                const orderButton = document.createElement('button');
+                orderButton.type = 'button';
+                orderButton.className = 'add-to-cart';
+                orderButton.innerHTML = 'Agregar al pedido <i class="fa-solid fa-plus"></i>';
+                orderButton.addEventListener('click', () => addToCart({
+                    id: `${currentCategory}-${item.name}`,
+                    name: item.name,
+                    price: item.price
+                }));
+                card.querySelector('a').replaceWith(orderButton);
+                grid.appendChild(card);
+            });
+        }
+
+        const cartStorageKey = 'cramosCart';
+        const cart = JSON.parse(localStorage.getItem(cartStorageKey)) || [];
+        const cartPanel = document.getElementById('cartPanel');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        function saveCart() {
+            localStorage.setItem(cartStorageKey, JSON.stringify(cart));
+        }
+
+        function addToCart(product) {
+            const existingProduct = cart.find((item) => item.id === product.id);
+            if (existingProduct) existingProduct.quantity += 1;
+            else cart.push({ ...product, quantity: 1 });
+            saveCart();
+            renderCart();
+            cartPanel.classList.add('open');
+            cartPanel.setAttribute('aria-hidden', 'false');
+        }
+
+        function updateQuantity(id, change) {
+            const product = cart.find((item) => item.id === id);
+            if (!product) return;
+            product.quantity += change;
+            if (product.quantity <= 0) cart.splice(cart.indexOf(product), 1);
+            saveCart();
+            renderCart();
+        }
+
+        function renderCart() {
+            const itemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            cartCount.textContent = itemsCount;
+            cartTotal.textContent = formatPrice(total);
+            checkoutBtn.disabled = cart.length === 0;
+            cartItems.innerHTML = '';
+
+            if (!cart.length) {
+                cartItems.innerHTML = '<p class="cart-empty">Aún no has agregado productos.</p>';
+                return;
+            }
+
+            cart.forEach((item) => {
+                const row = document.createElement('div');
+                row.className = 'cart-item';
+                const info = document.createElement('div');
+                const name = document.createElement('div');
+                name.className = 'cart-item-name';
+                name.textContent = item.name;
+                const price = document.createElement('div');
+                price.className = 'cart-item-price';
+                price.textContent = formatPrice(item.price * item.quantity);
+                info.append(name, price);
+
+                const controls = document.createElement('div');
+                controls.className = 'quantity-controls';
+                const minus = document.createElement('button');
+                minus.type = 'button'; minus.className = 'quantity-btn'; minus.textContent = '−';
+                minus.setAttribute('aria-label', `Quitar una unidad de ${item.name}`);
+                minus.addEventListener('click', () => updateQuantity(item.id, -1));
+                const quantity = document.createElement('span');
+                quantity.textContent = item.quantity;
+                const plus = document.createElement('button');
+                plus.type = 'button'; plus.className = 'quantity-btn'; plus.textContent = '+';
+                plus.setAttribute('aria-label', `Agregar una unidad de ${item.name}`);
+                plus.addEventListener('click', () => updateQuantity(item.id, 1));
+                controls.append(minus, quantity, plus);
+                row.append(info, controls);
+                cartItems.appendChild(row);
+            });
+        }
+
+        document.getElementById('openCartBtn').addEventListener('click', () => {
+            cartPanel.classList.add('open');
+            cartPanel.setAttribute('aria-hidden', 'false');
+        });
+        document.getElementById('closeCartBtn').addEventListener('click', () => {
+            cartPanel.classList.remove('open');
+            cartPanel.setAttribute('aria-hidden', 'true');
+        });
+        checkoutBtn.addEventListener('click', () => {
+            const lines = cart.map((item) => `• ${item.quantity} x ${item.name} — ${formatPrice(item.price * item.quantity)}`);
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const message = `Hola C'RAMOS, deseo realizar el siguiente pedido:\n\n${lines.join('\n')}\n\nTotal: ${formatPrice(total)}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+        });
+
+        // Initialize
+        renderTabs();
+        renderItems();
+        renderCart();
+
+        const galleryModal = document.getElementById('galleryModal');
+        const galleryModalImage = document.getElementById('galleryModalImage');
+        const closeGalleryModal = () => {
+            galleryModal.classList.remove('open');
+            galleryModal.setAttribute('aria-hidden', 'true');
+            galleryModalImage.src = '';
+        };
+
+        document.querySelectorAll('.gallery-card').forEach((card) => {
+            card.addEventListener('click', () => {
+                galleryModalImage.src = card.dataset.image;
+                galleryModalImage.alt = card.dataset.alt;
+                galleryModal.classList.add('open');
+                galleryModal.setAttribute('aria-hidden', 'false');
+            });
+        });
+
+        document.querySelector('.gallery-close').addEventListener('click', closeGalleryModal);
+        galleryModal.addEventListener('click', (event) => {
+            if (event.target === galleryModal) closeGalleryModal();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeGalleryModal();
+        });
+    </script>
+</body>
+</html>

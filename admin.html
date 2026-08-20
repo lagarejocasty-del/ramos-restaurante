@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C'RAMOS | Admin Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #0f0a07;
+      --bg-card: #18110c;
+      --bg-card-hover: #221812;
+      --accent-amber: #e67e22;
+      --accent-gold: #d35400;
+      --text-light: #f5efe6;
+      --text-muted: #a89f91;
+      --border-color: #2c1f17;
+      --success: #2ecc71;
+      --danger: #e74c3c;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(180deg, #0f0a07 0%, #1a120d 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .login-shell {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      border-radius: 26px;
+      overflow: hidden;
+      background: rgba(24,17,12,0.9);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+    }
+
+    .brand-panel {
+      background: linear-gradient(135deg, rgba(230,126,34,0.18), rgba(15,10,7,0.9)),
+                  url('https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .brand-panel h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.4rem, 4vw, 3.7rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .brand-panel p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 480px;
+    }
+
+    .login-panel {
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      color: var(--accent-amber);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      display: grid;
+      gap: 0.5rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid var(--border-color);
+      background: rgba(255,255,255,0.02);
+      color: var(--text-light);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: rgba(230,126,34,0.8);
+      box-shadow: 0 0 0 3px rgba(230,126,34,0.15);
+    }
+
+    .btn-login {
+      background: linear-gradient(135deg, var(--accent-amber), var(--accent-gold));
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 0.95rem 1.2rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+    }
+
+    .helper {
+      margin-top: 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .helper a {
+      color: var(--accent-amber);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .alert {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      background: rgba(231,76,60,0.12);
+      border: 1px solid rgba(231,76,60,0.4);
+      color: #ffd7d2;
+    }
+
+    @media (max-width: 760px) {
+      .login-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-panel {
+        min-height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-shell">
+    <div class="brand-panel">
+      <div>
+        <div class="eyebrow">Panel administrativo</div>
+        <h1>C'RAMOS</h1>
+        <p>Gestión del restaurante, inventario, costos, pedidos, eventos y control del negocio desde un solo lugar.</p>
+      </div>
+    </div>
+
+    <div class="login-panel">
+      <div class="eyebrow">Acceso exclusivo</div>
+      <h2>Iniciar sesión</h2>
+
+      <form id="loginForm">
+        <label>
+          Usuario
+          <input type="text" id="usuario" placeholder="admin" required>
+        </label>
+
+        <label>
+          Contraseña
+          <input type="password" id="password" placeholder="••••••••" required>
+        </label>
+
+        <button type="submit" class="btn-login">Entrar al panel</button>
+      </form>
+
+      <div id="alertBox" class="alert" role="alert"></div>
+
+      <div class="helper">
+        Acceso para administradores del sistema. <a href="index.html">Volver a la página principal</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const adminCredentials = {
+      usuario: 'admin',
+      password: 'cramos2026'
+    };
+
+    const form = document.getElementById('loginForm');
+    const alertBox = document.getElementById('alertBox');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const usuario = document.getElementById('usuario').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (usuario === adminCredentials.usuario && password === adminCredentials.password) {
+        localStorage.setItem('cramosAdminLoggedIn', 'true');
+        window.location.href = 'admin_panel.html';
+      } else {
+        alertBox.style.display = 'block';
+        alertBox.textContent = 'Credenciales incorrectas. Intente nuevamente.';
+      }
+    });
+  </script>
+</body>
+</html>
